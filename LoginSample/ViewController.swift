@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,GIDSignInUIDelegate {
 
     
 
@@ -19,7 +20,26 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //仮のサイズでツールバー生成
+        
+        
+        /*----------------------------------------------*/
+        //Googleへのログインボタンを追加
+        /*----------------------------------------------*/
+        GIDSignIn.sharedInstance().uiDelegate = self
+        //GIDSignIn.sharedInstance().signIn()
+        
+        let googleBtn = GIDSignInButton()
+        googleBtn.frame = CGRect(x:20,y:280,width:self.view.frame.size.width - 40,height:60)
+        view.addSubview(googleBtn)
+        
+        
+        
+        
+        
+        /*----------------------------------------------*/
+        //キーボードの上に「Done」ボタンを設置
+        /*----------------------------------------------*/
+        //ツールバー生成
         let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
         kbToolBar.barStyle = UIBarStyle.default  // スタイルを設定
         kbToolBar.sizeToFit()  // 画面幅に合わせてサイズを変更
@@ -42,7 +62,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //新規登録
+    /*----------------------------------------------*/
+    //emailとpasswordで新規登録＆ログイン
+    /*----------------------------------------------*/
+    //新規登録(email&password)
     @IBAction func newAdd(_ sender: UIButton) {
         print("memo:新規登録開始")
         Auth.auth().createUser(withEmail: emilTextField.text!, password: passTextField.text!) { (authResult, error) in
@@ -52,12 +75,11 @@ class ViewController: UIViewController {
             }
             if let authResult = authResult{
                 print("memo:新規登録成功",authResult.user.email!)
-                print("memo:")
             }
         }
     }
     
-    //ログイン
+    //ログイン(email&password)
     @IBAction func loginBtn(_ sender: UIButton) {
         print("memo:ログイン開始")
         Auth.auth().signIn(withEmail: emilTextField.text!, password: passTextField.text!) { (user, error) in
@@ -70,8 +92,5 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-
-
 }
 
