@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
                 print("memo:FirebaseへGoogleから得たトークン保存時にエラー",error)
                 return
             }
-            print("memo:Googleログイン成功",authResult?.additionalUserInfo)
+            print("memo:Googleログイン成功",authResult?.user.email)
         }
         
         

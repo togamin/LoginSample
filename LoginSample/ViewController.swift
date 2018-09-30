@@ -92,5 +92,18 @@ class ViewController: UIViewController,GIDSignInUIDelegate {
             }
         }
     }
+    
+    /*----------------------------------------------*/
+    //Googleログアウト
+    /*----------------------------------------------*/
+    @IBAction func logoutBtn(_ sender: UIButton) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            print("memo:サインアウト成功")
+        } catch let signOutError as NSError {
+            print ("memo:サインアウトエラー", signOutError)
+        }
+    }
 }
 
