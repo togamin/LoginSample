@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-class ViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate {
+class LoginViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate {
 
     
 
@@ -29,7 +29,7 @@ class ViewController: UIViewController,GIDSignInUIDelegate,GIDSignInDelegate {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        
+        //ボタン
         let googleBtn = GIDSignInButton()
         googleBtn.frame = CGRect(x:20,y:280,width:self.view.frame.size.width - 40,height:60)
         view.addSubview(googleBtn)
